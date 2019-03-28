@@ -10,7 +10,7 @@ buildscript {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.hiddenramblings.tagmo"
@@ -27,17 +27,6 @@ android {
         }
     }
 
-    productFlavors {
-        fat {
-            dimension "abi"
-            ndk {
-                abiFilters "x86", "armeabi-v7a", "armeabi"
-                versionCode = 0
-            }
-        }
-
-
-    }
     splits {
         abi {
             enable true
