@@ -632,6 +632,8 @@ public class BrowserActivity extends AppCompatActivity implements
 
         Bundle args = new Bundle();
         args.putByteArray(AmiiboActivity.ARG_TAG_DATA, tagData);
+        args.putString(AmiiboActivity.ARG_TAG_PATH, Util.friendlyPath(amiiboFile.filePath));
+
 
         Intent intent = new Intent(this, AmiiboActivity_.class);
         intent.putExtras(args);

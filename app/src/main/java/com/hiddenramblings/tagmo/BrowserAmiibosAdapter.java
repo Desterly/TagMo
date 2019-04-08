@@ -476,15 +476,14 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
             //setAmiiboInfoText(this.txtCharacter, boldMatchingText(character, query), tagInfo != null);
             if (item.getFilePath() != null) {
                 this.itemView.setEnabled(true);
-                this.txtPath.setText(boldMatchingText(Util.friendlyPath(item.getFilePath()), query));
-                this.txtPath.setTextColor(this.txtPath.getResources().getColor(R.color.tag_text));
+                //this.txtPath.setText(boldMatchingText(Util.friendlyPath(item.getFilePath()), query));
+                //this.txtPath.setTextColor(this.txtPath.getResources().getColor(R.color.tag_text));
             } else {
                 this.itemView.setEnabled(false);
                 this.txtPath.setText("No files for this Amiibo found");
                 this.txtPath.setTextColor(Color.RED);
+                this.txtPath.setVisibility(View.VISIBLE);
             }
-            this.txtPath.setVisibility(View.VISIBLE);
-
             if (this.imageAmiibo != null) {
                 this.imageAmiibo.setVisibility(View.GONE);
                 Glide.with(itemView).clear(target);

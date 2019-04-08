@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="tagWarning">#FF0000</color>
+    <color name="colorBackgroundHighlight">#C3C8E7</color>
+    <color name="tagNameRev">#FFFFFF</color>
 </resources>

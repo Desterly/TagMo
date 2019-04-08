@@ -67,7 +67,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="NAME"
-                        android:textColor="@color/tag_text"
+                        android:textColor="@color/tagNameRev"
+                        android:background="@color/colorPrimary"
                         android:layout_below="@+id/imageDivider"
                         android:textSize="16dp"/>
 
@@ -77,6 +78,16 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txtName"
                         android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtTagIdLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="@string/txtTagId"
+                            android:textColor="@color/tag_text"
+
+                            android:textSize="10dp"/>
 
                         <TextView
                             android:id="@+id/txtTagId"
@@ -92,15 +103,7 @@
                             android:layout_width="4dp"
                             android:layout_height="1dp"/>
 
-                        <TextView
-                            android:id="@+id/txtAmiiboType"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="AMIIBO TYPE"
-                            android:textColor="@color/tag_text"
-                            android:textSize="10dp"/>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -109,6 +112,47 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/group1"
                         android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtTagAmiiboTypeLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="@string/txtTagAmiiboType"
+                            android:textColor="@color/tag_text"
+
+                            android:textSize="10dp"/>
+
+                        <TextView
+                            android:id="@+id/txtAmiiboType"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="AMIIBO TYPE"
+                            android:textColor="@color/tag_text"
+                            android:textSize="10dp"/>
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="1dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/group3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/group2"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtGameSeriesLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="@string/txtTagGameSeries"
+                            android:textColor="@color/tag_text"
+
+                            android:textSize="10dp"/>
 
                         <TextView
                             android:id="@+id/txtGameSeries"
@@ -124,26 +168,72 @@
                             android:layout_width="4dp"
                             android:layout_height="1dp"/>
 
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/group4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/group3"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtAmiiboSeriesLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="@string/txtTagAmiiboSeries"
+                            android:textColor="@color/tag_text"
+
+                            android:textSize="10dp"/>
                         <TextView
                             android:id="@+id/txtAmiiboSeries"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="end"
+                            android:gravity="start"
                             android:text="AMIIBO SERIES"
                             android:textColor="@color/tag_text"
                             android:textSize="10dp"/>
-                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txtPath"
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="1dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/group5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/group2"
-                        android:text="PATH"
-                        android:textColor="@color/tag_text"
-                        android:textSize="10dp"
-                        android:visibility="gone"/>
+                        android:layout_below="@+id/group4"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtAmiiboPathLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="@string/txtTagPath"
+                            android:textColor="@color/tag_text"
+                            android:textSize="10dp"
+                            android:visibility="gone"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/group6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/group5"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtPath"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="PATH"
+                            android:textColor="@color/tag_text"
+                            android:textSize="10dp"
+                            android:visibility="gone"/>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtCharacter"

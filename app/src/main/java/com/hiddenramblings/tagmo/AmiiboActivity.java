@@ -55,6 +55,7 @@ public class AmiiboActivity extends AppCompatActivity {
     public static final String BACKGROUND_AMIIBO_MANAGER = "amiibo_manager";
 
     public static final String ARG_TAG_DATA = "tag_data";
+    public static final String ARG_TAG_PATH = "tag_path";
 
     private static final int NFC_ACTIVITY = 0x102;
     private static final int EDIT_TAG = 0x103;
@@ -79,9 +80,18 @@ public class AmiiboActivity extends AppCompatActivity {
     TextView txtAmiiboSeries;
     @ViewById(R.id.imageAmiibo)
     ImageView imageAmiibo;
+    @ViewById(R.id.txtAmiiboPathLabel)
+    TextView txtAmiiboPathLabel;
+    @ViewById(R.id.txtPath)
+    TextView txtAmiiboPath;
+
 
     @Extra(ARG_TAG_DATA)
     byte[] tagData;
+
+    @Extra(ARG_TAG_PATH)
+    String tagPath;
+
 
     AmiiboManager amiiboManager = null;
 
@@ -303,6 +313,7 @@ public class AmiiboActivity extends AppCompatActivity {
         String tagInfo = null;
         String amiiboHexId = "";
         String amiiboName = "";
+        String amiiboPath = "";
         String amiiboSeries = "";
         String amiiboType = "";
         String gameSeries = "";
@@ -365,6 +376,10 @@ public class AmiiboActivity extends AppCompatActivity {
         setAmiiboInfoText(txtAmiiboSeries, amiiboSeries, tagInfo != null);
         setAmiiboInfoText(txtAmiiboType, amiiboType, tagInfo != null);
         setAmiiboInfoText(txtGameSeries, gameSeries, tagInfo != null);
+        if (this.tagPath != null) {
+            txtAmiiboPathLabel.setVisibility(View.VISIBLE);
+            setAmiiboInfoText(txtAmiiboPath, this.tagPath, tagInfo != null);
+        }
         //setAmiiboInfoText(txtCharacter, character, tagInfo != null);
 
         if (imageAmiibo != null) {
