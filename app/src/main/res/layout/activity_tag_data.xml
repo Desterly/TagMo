@@ -179,7 +179,7 @@
                 style="@style/TagEditor.Header.NoBackground"
                 android:text="Settings"/>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/userDataSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -334,7 +334,7 @@
                 style="@style/TagEditor.Header.NoBackground"
                 android:text="App Data"/>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/appDataSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

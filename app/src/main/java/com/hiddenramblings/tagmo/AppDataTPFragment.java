@@ -2,7 +2,7 @@ package com.hiddenramblings.tagmo;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
