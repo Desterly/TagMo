@@ -476,6 +476,7 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
             //setAmiiboInfoText(this.txtCharacter, boldMatchingText(character, query), tagInfo != null);
             if (item.getFilePath() != null) {
                 this.itemView.setEnabled(true);
+                this.txtPath.setVisibility(View.GONE);
                 //this.txtPath.setText(boldMatchingText(Util.friendlyPath(item.getFilePath()), query));
                 //this.txtPath.setTextColor(this.txtPath.getResources().getColor(R.color.tag_text));
             } else {
