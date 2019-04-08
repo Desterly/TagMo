@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-def AAVersion = '4.5.0-SNAPSHOT'
+def AAVersion = '4.6.0'
 def AndroidSupportVersion = '26.1.0'
 
 buildscript {
