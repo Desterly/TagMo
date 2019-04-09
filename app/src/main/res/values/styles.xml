@@ -8,6 +8,8 @@
 
         <!-- Theme for the Preferences -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <!-- Enable Transitions -->
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="AppTheme2" parent="AppTheme">

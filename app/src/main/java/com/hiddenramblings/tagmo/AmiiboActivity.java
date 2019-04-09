@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -21,8 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.hiddenramblings.tagmo.amiibo.Amiibo;
 import com.hiddenramblings.tagmo.amiibo.AmiiboManager;
@@ -56,6 +61,7 @@ public class AmiiboActivity extends AppCompatActivity {
 
     public static final String ARG_TAG_DATA = "tag_data";
     public static final String ARG_TAG_PATH = "tag_path";
+    public static final String ARG_TRANSITION_NAME = "transition_name";
 
     private static final int NFC_ACTIVITY = 0x102;
     private static final int EDIT_TAG = 0x103;
@@ -92,6 +98,8 @@ public class AmiiboActivity extends AppCompatActivity {
     @Extra(ARG_TAG_PATH)
     String tagPath;
 
+    @Extra(ARG_TRANSITION_NAME)
+    String transitionName;
 
     AmiiboManager amiiboManager = null;
 
@@ -101,8 +109,15 @@ public class AmiiboActivity extends AppCompatActivity {
     @InstanceState
     boolean ignoreTagTd;
 
+
+
     @AfterViews
     void afterViews() {
+        supportPostponeEnterTransition();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageAmiibo.setTransitionName(transitionName);
+        }
+
         toolbar.inflateMenu(R.menu.tag_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -138,7 +153,8 @@ public class AmiiboActivity extends AppCompatActivity {
 
     @Click(R.id.container)
     void onContainerClick() {
-        finish();
+        supportFinishAfterTransition();
+
     }
 
     void openTagEditor() {
@@ -162,24 +178,6 @@ public class AmiiboActivity extends AppCompatActivity {
         this.tagData = data.getByteArrayExtra(Actions.EXTRA_TAG_DATA);
         this.updateAmiiboView();
     }
-
-    SimpleTarget<Bitmap> amiiboImageTarget = new SimpleTarget<Bitmap>() {
-        @Override
-        public void onLoadStarted(@Nullable Drawable placeholder) {
-            imageAmiibo.setVisibility(View.GONE);
-        }
-
-        @Override
-        public void onLoadFailed(@Nullable Drawable errorDrawable) {
-            imageAmiibo.setVisibility(View.GONE);
-        }
-
-        @Override
-        public void onResourceReady(Bitmap resource, Transition transition) {
-            imageAmiibo.setImageBitmap(resource);
-            imageAmiibo.setVisibility(View.VISIBLE);
-        }
-    };
 
     void loadAmiiboManager() {
         BackgroundExecutor.cancelAll(BACKGROUND_AMIIBO_MANAGER, true);
@@ -320,6 +318,8 @@ public class AmiiboActivity extends AppCompatActivity {
         String character = "";
         final String amiiboImageUrl;
 
+
+
         if (this.tagData == null) {
             tagInfo = "<No Tag Loaded>";
             amiiboImageUrl = null;
@@ -383,15 +383,34 @@ public class AmiiboActivity extends AppCompatActivity {
         //setAmiiboInfoText(txtCharacter, character, tagInfo != null);
 
         if (imageAmiibo != null) {
-            imageAmiibo.setVisibility(View.GONE);
-            Glide.with(this).clear(amiiboImageTarget);
+
+            //imageAmiibo.setVisibility(View.VISIBLE);
+            Glide.with(this).clear(imageAmiibo);
             if (amiiboImageUrl != null) {
                 Glide.with(this)
                     .setDefaultRequestOptions(new RequestOptions().onlyRetrieveFromCache(onlyRetrieveFromCache()))
                     .asBitmap()
                     .load(amiiboImageUrl)
-                    .into(amiiboImageTarget);
+                    .dontAnimate()
+                    .listener(new RequestListener<Bitmap>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                            supportStartPostponedEnterTransition();
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                            //imageAmiibo.setVisibility(View.VISIBLE);
+                            supportStartPostponedEnterTransition();
+                            return false;
+                        }
+                    })
+                    .into(imageAmiibo);
+            } else {
+                supportStartPostponedEnterTransition();
             }
+
         }
     }
 

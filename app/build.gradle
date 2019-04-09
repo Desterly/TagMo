@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId "com.hiddenramblings.tagmo"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 5
         versionName "2.6.1"
     }
@@ -67,13 +67,14 @@ dependencies {
     implementation "androidx.preference:preference:$AndroidSupportVersion"
     implementation "androidx.legacy:legacy-preference-v14:$AndroidSupportVersion"
     implementation "androidx.cardview:cardview:$AndroidSupportVersion"
+    annotationProcessor 'androidx.annotation:annotation:1.0.0'
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
     annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'org.parceler:parceler-api:1.1.12'
     implementation 'com.robertlevonyan.view:MaterialChipView:1.0.1'
     implementation 'org.apmem.tools:layouts:1.10@aar'
-    implementation 'com.github.bumptech.glide:glide:4.0.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.vicmikhailau:MaskedEditText:2.0.4'
 }

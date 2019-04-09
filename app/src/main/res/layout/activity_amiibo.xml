@@ -52,8 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginBottom="4dp"
-                        android:foreground="@drawable/card_foreground"
-                        android:visibility="gone"/>
+                        android:foreground="@drawable/card_foreground" />
 
                     <View
                         android:id="@+id/imageDivider"
@@ -253,8 +252,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
-                app:popupTheme="@style/PopupTheme"
-                app:theme="@style/PopupThemeOverlay"/>
+                android:popupTheme="@style/PopupTheme"
+                android:theme="@style/PopupThemeOverlay"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

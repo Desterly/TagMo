@@ -9,7 +9,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -618,7 +620,7 @@ public class BrowserActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onAmiiboClicked(AmiiboFile amiiboFile) {
+    public void onAmiiboClicked(AmiiboFile amiiboFile, ImageView amiiboImage) {
         if (amiiboFile.filePath == null)
             return;
 
@@ -630,25 +632,39 @@ public class BrowserActivity extends AppCompatActivity implements
             return;
         }
 
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this,
+                        amiiboImage,
+                        ViewCompat.getTransitionName(amiiboImage));
+
         Bundle args = new Bundle();
         args.putByteArray(AmiiboActivity.ARG_TAG_DATA, tagData);
         args.putString(AmiiboActivity.ARG_TAG_PATH, Util.friendlyPath(amiiboFile.filePath));
+        args.putString(AmiiboActivity.ARG_TRANSITION_NAME, ViewCompat.getTransitionName(amiiboImage));
 
 
         Intent intent = new Intent(this, AmiiboActivity_.class);
         intent.putExtras(args);
 
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
+        //startActivity(intent);
     }
 
     @Override
     public void onAmiiboImageClicked(AmiiboFile amiiboFile) {
+
+        //ActivityOptionsCompat options = ActivityOptionsCompat.
+        //        makeSceneTransitionAnimation(this,
+        //                amiiboImage,
+        //                ViewCompat.getTransitionName(amiiboImage));
+
         Bundle bundle = new Bundle();
         bundle.putLong(ImageActivity.INTENT_EXTRA_AMIIBO_ID, amiiboFile.getId());
 
         Intent intent = new Intent(this, ImageActivity_.class);
         intent.putExtras(bundle);
 
+        //this.startActivity(intent,options.toBundle());
         this.startActivity(intent);
     }
 

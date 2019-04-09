@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -118,7 +119,10 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
 
     @Override
     public void onBindViewHolder(final AmiiboVewHolder holder, int position) {
-        holder.bind(getItem(position));
+        final AmiiboFile amiiboview = getItem(position);
+        final String amiiboIdStr = TagUtil.amiiboIdToHex(amiiboview.getId());
+        ViewCompat.setTransitionName(holder.imageAmiibo, amiiboIdStr);
+        holder.bind(amiiboview);
     }
 
     class AmiiboComparator implements Comparator<AmiiboFile> {
@@ -395,11 +399,13 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
 
             this.settings = settings;
             this.listener = listener;
+
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (AmiiboVewHolder.this.listener != null) {
-                        AmiiboVewHolder.this.listener.onAmiiboClicked(amiiboFile);
+
+                        AmiiboVewHolder.this.listener.onAmiiboClicked(amiiboFile,imageAmiibo);
                     }
                 }
             });
@@ -418,6 +424,7 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
                     @Override
                     public void onClick(View view) {
                         if (AmiiboVewHolder.this.listener != null) {
+                            //AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile,imageAmiibo);
                             AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile);
                         }
                     }
@@ -588,7 +595,7 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
     }
 
     public interface OnAmiiboClickListener {
-        void onAmiiboClicked(AmiiboFile amiiboFile);
+        void onAmiiboClicked(AmiiboFile amiiboFile, ImageView amiiboImage);
 
         void onAmiiboImageClicked(AmiiboFile amiiboFile);
     }
