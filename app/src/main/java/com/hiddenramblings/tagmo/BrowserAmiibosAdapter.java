@@ -424,8 +424,8 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
                     @Override
                     public void onClick(View view) {
                         if (AmiiboVewHolder.this.listener != null) {
-                            //AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile,imageAmiibo);
-                            AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile);
+                            AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile,imageAmiibo);
+                            //AmiiboVewHolder.this.listener.onAmiiboImageClicked(amiiboFile);
                         }
                     }
                 });
@@ -597,6 +597,6 @@ class BrowserAmiibosAdapter extends RecyclerView.Adapter<BrowserAmiibosAdapter.A
     public interface OnAmiiboClickListener {
         void onAmiiboClicked(AmiiboFile amiiboFile, ImageView amiiboImage);
 
-        void onAmiiboImageClicked(AmiiboFile amiiboFile);
+        void onAmiiboImageClicked(AmiiboFile amiiboFile, ImageView amiiboImage);
     }
 }

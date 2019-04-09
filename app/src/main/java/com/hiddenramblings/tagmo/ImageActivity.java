@@ -3,9 +3,19 @@ package com.hiddenramblings.tagmo;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
+
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Build;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +52,7 @@ public class ImageActivity extends AppCompatActivity {
     public static final String BACKGROUND_AMIIBO_MANAGER = "amiibo_manager";
 
     public static final String INTENT_EXTRA_AMIIBO_ID = "AMIIBO_ID";
+    public static final String ARG_TRANSITION_NAME = "transition_name";
 
     @ViewById(R.id.imageAmiibo)
     ImageView imageView;
@@ -69,11 +80,18 @@ public class ImageActivity extends AppCompatActivity {
     @Extra(INTENT_EXTRA_AMIIBO_ID)
     long amiiboId;
 
+    @Extra(ARG_TRANSITION_NAME)
+    String transitionName;
+
     Amiibo amiibo;
     AmiiboManager amiiboManager;
 
     @AfterViews
     void afterViews() {
+        supportPostponeEnterTransition();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageView.setTransitionName(transitionName);
+        }
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -139,9 +157,29 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     void updateImage() {
+        //Glide.with(this)
+        //    .load(getImageUrl())
+        //    .into(imageView);
         Glide.with(this)
-            .load(getImageUrl())
-            .into(imageView);
+                //.setDefaultRequestOptions(new RequestOptions().onlyRetrieveFromCache(onlyRetrieveFromCache()))
+                .asBitmap()
+                .load(getImageUrl())
+                .dontAnimate()
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        //imageAmiibo.setVisibility(View.VISIBLE);
+                        supportStartPostponedEnterTransition();
+                        return false;
+                    }
+                })
+                .into(imageView);
     }
 
     void updateView() {

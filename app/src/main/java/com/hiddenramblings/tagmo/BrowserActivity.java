@@ -651,21 +651,27 @@ public class BrowserActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onAmiiboImageClicked(AmiiboFile amiiboFile) {
+    public void onAmiiboImageClicked(AmiiboFile amiiboFile,ImageView amiiboImage) {
 
         //ActivityOptionsCompat options = ActivityOptionsCompat.
         //        makeSceneTransitionAnimation(this,
         //                amiiboImage,
         //                ViewCompat.getTransitionName(amiiboImage));
 
-        Bundle bundle = new Bundle();
-        bundle.putLong(ImageActivity.INTENT_EXTRA_AMIIBO_ID, amiiboFile.getId());
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this,
+                        amiiboImage,
+                        ViewCompat.getTransitionName(amiiboImage));
+
+        Bundle args = new Bundle();
+        args.putLong(ImageActivity.INTENT_EXTRA_AMIIBO_ID, amiiboFile.getId());
+        args.putString(ImageActivity.ARG_TRANSITION_NAME, ViewCompat.getTransitionName(amiiboImage));
 
         Intent intent = new Intent(this, ImageActivity_.class);
-        intent.putExtras(bundle);
+        intent.putExtras(args);
 
-        //this.startActivity(intent,options.toBundle());
-        this.startActivity(intent);
+        this.startActivity(intent,options.toBundle());
+        //this.startActivity(intent);
     }
 
     @Override
