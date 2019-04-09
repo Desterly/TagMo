@@ -4,14 +4,14 @@
 
     <androidx.preference.PreferenceCategory
         android:title="Encryption Keys">
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_import_keys"
             android:title="Import Keys"/>
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
         android:title="Image Loading">
-        <android.support.v7.preference.ListPreference
+        <androidx.preference.ListPreference
             android:entries="@array/imageNetworkSettings"
             android:entryValues="@array/imageNetworkSettingValues"
             android:key="@string/image_network_settings"
@@ -19,14 +19,14 @@
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory android:title="Tag Validation">
-        <android.support.v7.preference.CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/settings_enable_tag_type_validation"
             android:summary="Not all NFC chipsets correctly identify NFC tags. Disabling tag verification will write to tags that may not be Amiibo compatible or may fail in unexpected ways."
             android:title="Enable NTAG215 validation"/>
     </androidx.preference.PreferenceCategory>
     <androidx.preference.PreferenceCategory android:title="PowerTag">
-        <android.support.v7.preference.CheckBoxPreference
+        <androidx.preference.CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/settings_enable_power_tag_support"
             android:summary="Support is currently under development. See the Wiki on github for limitations and use."
@@ -34,38 +34,38 @@
     </androidx.preference.PreferenceCategory>
     <androidx.preference.PreferenceCategory
         android:title="Amiibo Info">
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_import_info_amiiboapi"
             android:summary="Syncs Amiibo info with amiiboapi.com"
             android:title="Sync Amiibo info with AmiiboAPI"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_import_info"
             android:summary="Import Amiibo info from JSON"
             android:title="Import Amiibo info"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_export_info"
             android:summary="Export Amiibo info to JSON"
             android:title="Export Amiibo info"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_reset_info"
             android:title="Reset Amiibo info"/>
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
         android:title="Amiibo Info Stats">
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_info_amiibos"
             android:title="Amiibos"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_info_game_series"
             android:title="Game Series"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_info_characters"
             android:title="Characters"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_info_amiibo_series"
             android:title="Amiibo Series"/>
-        <android.support.v7.preference.Preference
+        <androidx.preference.Preference
             android:key="@string/settings_info_amiibo_types"
             android:title="Amiibo Types"/>
     </androidx.preference.PreferenceCategory>
